@@ -1,0 +1,22 @@
+#!/bin/sh
+#hisat2-build
+#hisat2 align
+#stringtie annotation
+#samtools view and sort
+#ARGv[0]=ref_genome
+#ARGV[1]=ref_gtf
+#ARGV[2]=base_name
+ref_gnome=$1
+ref_gtf=$2
+base=$3
+hisat2-build $ref_gnome $base
+perl hisat2_BD342.pl
+perl hisat2_BD410.pl
+#will soon work on converting this to python
+samtools view -b -o BD410.bam BD410.sam
+samtools view -b -o BD342.bam BD342.sam
+samtools sort BD410.bam > BD410_sorted.bam
+samtools sort BD342.bam > BD342_sorted.bam
+stringtie -G $ref_gtf -o BD342.gtf BD342_sorted.bam
+stringtie -G $ref_gtf -o BD410.gtf BD410_sorted.bam
+gffcompare -r $ref_gtf BD410.gtf BD342.gtf
