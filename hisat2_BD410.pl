@@ -3,8 +3,7 @@
 my $r1, $r2;
 open(my $r1file,"R1.txt") or die "Can't open R1.txt";
 open(my $r2file,"R2.txt") or die "Can't open R2.txt";
-#print $r2file;
-#$r1=<$r1file>; print $r1;
+#R1.txt and R2.txt are files with a list of R1/R2 reads files
 $r1=<$r1file>;$r2=<$r2file>;
 my $BD342_1,$BD342_2,$BD410_1,$BD410_2;
 while($r1)
