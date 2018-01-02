@@ -18,6 +18,9 @@ for line in unref:
 	if "ref_gene_id" in line:
 		continue
 	values = line.split('\t')
+	#skip lines with ref transcript id
+	if values[0] != "-":
+		continue
 	transcript_id = values[4]
 	ids.add(transcript_id)
 for line in ann:
